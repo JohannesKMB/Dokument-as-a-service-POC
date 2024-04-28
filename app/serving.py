@@ -1,17 +1,12 @@
 from fastapi import FastAPI
 from transformers import AutoProcessor, UdopForConditionalGeneration
 from pydantic import BaseModel
-from datasets import load_dataset
 import pytesseract
 from pdf2image import convert_from_bytes
 
 
 processor = AutoProcessor.from_pretrained("microsoft/udop-large", apply_ocr=True)
 model = UdopForConditionalGeneration.from_pretrained("microsoft/udop-large")
-
-dataset = load_dataset("nielsr/funsd-layoutlmv3", split="train")
-example = dataset[0]
-image = example["image"]
 
 path = r'C:\Users\Karl\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd = path
